@@ -58,12 +58,12 @@
         let location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
         map.panTo(location);
     }
-
+    /*
     var infowindow = new google.maps.InfoWindow();
     google.maps.event.addListener(map, "click", function (event) {
         infowindow.close();
-    });
-    /*
+    });*/
+
     fetch('places.json')
         .then(response => response.json())
         .then(json => {
@@ -71,9 +71,7 @@
                 let marker = new google.maps.Marker({
                     position: {lat: parseFloat(place.location.lat), lng: parseFloat(place.location.long)},
                     title: place.rating,
-                    map: map
                 });
-                marker.setVisible(false);
                 marker.addListener('click', function () {
                     infowindow.setContent(`
                             <p><strong>${place.name}</strong></p>
@@ -85,8 +83,8 @@
                 });
                 return marker;
             });
-            //var markerCluster = new MarkerClusterer(map, markers, {gridSize: 50, maxZoom: 18});
-        });*/
+            var markerCluster = new MarkerClusterer(map, markers, {gridSize: 50, maxZoom: 18});
+        });
 </script>
 
 </body>
