@@ -52,7 +52,7 @@
     map.setOptions({styles: noPoi});
     var GeoMarker = new GeolocationMarker(map);
 
-    navigator.geolocation.watchPosition(showPosition);
+    navigator.geolocation.getCurrentPosition(showPosition);
     function showPosition(position) {
         let location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
         map.panTo(location);
