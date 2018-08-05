@@ -25,6 +25,7 @@
 <body>
 <div id="map"></div>
 <script src="https://maps.googleapis.com/maps/api/js"></script>
+<script src="./markerclusterer.js"></script>
 <script src="https://unpkg.com/geolocation-marker@2.0.5/geolocation-marker.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.4/fetch.min.js"></script>
 <script>
@@ -67,10 +68,9 @@
     fetch('places.json')
         .then(response => response.json())
         .then(json => {
-            json.places.forEach(place => {
+            var markers = json.places.map(place => {
                 let marker = new google.maps.Marker({
                     position: {lat: parseFloat(place.location.lat), lng: parseFloat(place.location.long)},
-                    map: map,
                     title: place.rating,
                 });
                 marker.addListener('click', function () {
@@ -82,7 +82,10 @@
                         `);
                     infowindow.open(map, marker);
                 });
-            })
+                return marker;
+            });
+            var markerCluster = new MarkerClusterer(map, markers,
+                {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
         });
 </script>
 
