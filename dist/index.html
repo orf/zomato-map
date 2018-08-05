@@ -74,7 +74,7 @@
         clusterer.addMarkers(visibleMarkers);
     };
 
-    google.maps.event.addListener(map,'bounds_changed', _.debounce(updateMarkers, 1000));
+    google.maps.event.addListener(map,'bounds_changed', _.debounce(updateMarkers, 500));
 
     var markers;
     var clusterer;
