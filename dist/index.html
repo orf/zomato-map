@@ -71,8 +71,9 @@
                 let marker = new google.maps.Marker({
                     position: {lat: parseFloat(place.location.lat), lng: parseFloat(place.location.long)},
                     title: place.rating,
+                    map: map,
                 });
-                marker.addListener('click', function () {
+                /*marker.addListener('click', function () {
                     infowindow.setContent(`
                             <p><strong>${place.name}</strong></p>
                             <p>${place.cuisines}</p>
@@ -80,7 +81,7 @@
                             <p><a href="${place.deeplink}">Open in Zomato</a></p>
                         `);
                     infowindow.open(map, marker);
-                });
+                });*/
                 return marker;
             });
             var markerCluster = new MarkerClusterer(map, markers,
