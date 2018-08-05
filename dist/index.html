@@ -35,25 +35,6 @@
         mapTypeId: google.maps.MapTypeId.ROADMAP
     });
     var GeoMarker = new GeolocationMarker(map);
-    let marker = null;
-
-    //navigator.geolocation.watchPosition(showPosition);
-    function showPosition(position) {
-        let location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-        if (!marker) {
-            marker = new google.maps.Marker({
-                icon: {
-                    scale: 10,
-                    path: google.maps.SymbolPath.CIRCLE
-                },
-                position: location,
-                map: map,
-                title: 'you'
-            });
-        }
-        marker.setPosition(location);
-        map.panTo(location);
-    }
 
     fetch('places.json')
         .then(response => response.json())
