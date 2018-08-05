@@ -71,7 +71,6 @@
                 let marker = new google.maps.Marker({
                     position: {lat: parseFloat(place.location.lat), lng: parseFloat(place.location.long)},
                     title: place.rating,
-                    map: map,
                 });
                 /*marker.addListener('click', function () {
                     infowindow.setContent(`
