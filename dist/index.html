@@ -55,7 +55,12 @@
             .then(json => {
                 json.places.forEach(place => {
                     var infowindow = new google.maps.InfoWindow({
-                        content: 'HELLO'
+                        content: `
+                            <p><strong>${place.name}</strong></p>
+                            <p>${place.cuisines}</p>
+                            <p>Rating: ${place.rating} / Gold Offer: ${place.offer}</p>
+                            <p><a href="${place.deeplink}">Open in Zomato</a></p>
+                        `
                     });
                     let marker = new google.maps.Marker({
                         position: {lat: parseFloat(place.location.lat), lng: parseFloat(place.location.long)},
