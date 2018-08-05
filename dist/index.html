@@ -29,7 +29,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.4/fetch.min.js"></script>
 <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
 <script>
-
     map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: 38.7223, lng: -9.1393},
         zoom: 18,
@@ -58,11 +57,11 @@
         let location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
         map.panTo(location);
     }
-    /*
+
     var infowindow = new google.maps.InfoWindow();
     google.maps.event.addListener(map, "click", function (event) {
         infowindow.close();
-    });*/
+    });
 
     fetch('places.json')
         .then(response => response.json())
@@ -71,8 +70,10 @@
                 let marker = new google.maps.Marker({
                     position: {lat: parseFloat(place.location.lat), lng: parseFloat(place.location.long)},
                     title: place.rating,
+                    map: map
                 });
-                /*marker.addListener('click', function () {
+                marker.setVisible(false);
+                marker.addListener('click', function () {
                     infowindow.setContent(`
                             <p><strong>${place.name}</strong></p>
                             <p>${place.cuisines}</p>
@@ -80,11 +81,10 @@
                             <p><a href="${place.deeplink}">Open in Zomato</a></p>
                         `);
                     infowindow.open(map, marker);
-                });*/
+                });
                 return marker;
             });
-            var markerCluster = new MarkerClusterer(map, markers,
-            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+
         });
 </script>
 
