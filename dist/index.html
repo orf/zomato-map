@@ -73,6 +73,7 @@
                     position: {lat: parseFloat(place.location.lat), lng: parseFloat(place.location.long)},
                     title: place.rating,
                 });
+                marker.setVisible(false);
                 marker.addListener('click', function () {
                     infowindow.setContent(`
                             <p><strong>${place.name}</strong></p>
