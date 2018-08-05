@@ -33,7 +33,6 @@
     map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: 38.7223, lng: -9.1393},
         zoom: 18,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
     });
     var noPoi = [
         {
@@ -59,12 +58,12 @@
         let location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
         map.panTo(location);
     }
-    /*
+
     var infowindow = new google.maps.InfoWindow();
     google.maps.event.addListener(map, "click", function (event) {
         infowindow.close();
     });
-
+    /*
     fetch('places.json')
         .then(response => response.json())
         .then(json => {
