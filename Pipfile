@@ -3,7 +3,18 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 name = "pypi"
 
+[scripts]
+scrape = 'python scraper/scraper.py'
+reduce = 'python scraper/reduce.py'
+
 [packages]
+aiohttp = "*"
+aiodns = "*"
+chardet = "*"
+cchardet = "*"
+beautifulsoup4 = "*"
+lxml = "*"
+tqdm = "*"
 
 [dev-packages]
 
