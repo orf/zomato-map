@@ -11,7 +11,16 @@ reduced_places = {
 
 for place in raw_places:
     reduced_places['places'].append({
-        ''
+        'location': {
+            'lat': place['location']['latitude'],
+            'long': place['location']['longitude']
+        },
+        'name': place['name'],
+        'offer': place['offer_type'],
+        'rating': place['user_rating']['aggregate_rating'],
+        'deeplink': place['deeplink'],
+        'cost': place['average_cost_for_two'],
+        'cuisines': place['cuisines']
     })
 
-Path('src/places.json').write_text(json.dumps(reduced_places))
+Path('src/places.json').write_text(json.dumps(reduced_places, indent=4, sort_keys=True))

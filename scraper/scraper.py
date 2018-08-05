@@ -72,6 +72,7 @@ async def fetch_place_from_api(sesh, id, offer_type):
     async with sesh.get(f'https://developers.zomato.com/api/v2.1/restaurant?res_id={id}', headers=api_headers) as resp:
         res_json = await resp.json()
         res_json['offer_type'] = offer_type
+        res_json.pop('apikey', None)
         return res_json
 
 
