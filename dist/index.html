@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Zomato Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+         * element that contains the map. */
+        #map {
+            height: 100%;
+        }
+
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="map"></div>
+<script>
+    var map;
+
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 38.7141234, lng: -9.1352422},
+            zoom: 18
+        });
+
+        let marker = null;
+        navigator.geolocation.watchPosition(showPosition);
+
+        function showPosition(position) {
+            let location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+            if (!marker) {
+                marker = new google.maps.Marker({
+                    icon: {
+                        scale: 10,
+                        path: google.maps.SymbolPath.CIRCLE
+                    },
+                    position: location,
+                    map: map,
+                    title: 'you'
+                });
+            }
+            marker.setPosition(location);
+            map.panTo(location);
+        }
+
+        fetch('places.json')
+            .then(response => response.json())
+            .then(json => {
+                json.places.forEach(place => {
+                    var infowindow = new google.maps.InfoWindow({
+                        content: 'HELLO'
+                    });
+                    let marker = new google.maps.Marker({
+                        position: {lat: parseFloat(place.location.lat), lng: parseFloat(place.location.long)},
+                        map: map,
+                        title: place.rating,
+                    });
+                    marker.addListener('click', function () {
+                        infowindow.open(map, marker);
+                    });
+                })
+            })
+    }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?callback=initMap"
+        async defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.4/fetch.min.js"></script>
+</body>
+</html>

@@ -4,6 +4,7 @@ import datetime
 
 raw_places = json.loads(Path('zomato_places.json').read_text())
 
+
 reduced_places = {
     'updated': datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
     'places': []
