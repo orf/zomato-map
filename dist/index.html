@@ -27,7 +27,7 @@
 <script src="https://maps.googleapis.com/maps/api/js"></script>
 <script src="https://unpkg.com/geolocation-marker@2.0.5/geolocation-marker.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.4/fetch.min.js"></script>
-<script src="https://unpkg.com/@google/markerclustererplus@2.1.11/src/markerclusterer.js"></script>
+<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
 <script>
 
     map = new google.maps.Map(document.getElementById('map'), {
@@ -83,7 +83,7 @@
                 });
                 return marker;
             });
-            var markerCluster = new MarkerClusterer(map, markers, {gridSize: 50, maxZoom: 18});
+            var markerCluster = new MarkerClusterer(map, markers);
         });
 </script>
 
