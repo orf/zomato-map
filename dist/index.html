@@ -28,6 +28,7 @@
 <script src="https://unpkg.com/geolocation-marker@2.0.5/geolocation-marker.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.4/fetch.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.10/lodash.min.js"></script>
+<script src="https://unpkg.com/@google/markerclustererplus@2.1.11/src/markerclusterer.js"></script>
 <script>
     map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: 38.7223, lng: -9.1393},
@@ -67,12 +68,16 @@
         if (!markers) return;
         markers.forEach(m => m.setVisible(false));
         const bounds = map.getBounds();
-        markers.filter(m => bounds.contains(m.position)).forEach(m => m.setVisible(true));
+        clusterer.clearMarkers();
+        var visibleMarkers = markers.filter(m => bounds.contains(m.position));
+        visibleMarkers.forEach(m => m.setVisible(true));
+        clusterer.addMarkers(visibleMarkers);
     };
 
     google.maps.event.addListener(map,'bounds_changed', _.debounce(updateMarkers, 1000));
 
     var markers;
+    var clusterer;
 
     fetch('places.json')
         .then(response => response.json())
@@ -81,7 +86,6 @@
                 let marker = new google.maps.Marker({
                     position: {lat: parseFloat(place.location.lat), lng: parseFloat(place.location.long)},
                     title: place.rating,
-                    map: map
                 });
                 marker.addListener('click', function () {
                     infowindow.setContent(`
@@ -94,6 +98,7 @@
                 });
                 return marker;
             });
+            clusterer = new MarkerClusterer(map, markers);
 
         });
 </script>
